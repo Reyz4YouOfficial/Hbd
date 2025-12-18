@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday 🤍</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Poppins',sans-serif}
+body{
+    background:#000;
+    color:#fff;
+    text-align:center;
+    overflow-x:hidden;
+}
+.page{
+    min-height:100vh;
+    display:none;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+.page.active{display:flex}
+
+/* TYPING TEXT */
+.typing{
+    font-size:20px;
+    margin-bottom:20px;
+    min-height:60px;
+}
+
+/* BUTTON SHINE */
+.btn{
+    margin-top:20px;
+    padding:14px 26px;
+    border:none;
+    border-radius:30px;
+    background:linear-gradient(120deg,#ff4fa3,#ff9fd1);
+    color:#fff;
+    font-weight:600;
+    cursor:pointer;
+    position:relative;
+    overflow:hidden;
+}
+.btn::before{
+    content:"";
+    position:absolute;
+    left:-80%;
+    top:0;
+    width:50%;
+    height:100%;
+    background:linear-gradient(120deg,transparent,rgba(255,255,255,.7),transparent);
+    animation:shine 2s infinite;
+}
+@keyframes shine{to{left:130%}}
+
+/* CAKE */
+.cake{
+    margin-top:20px;
+    width:220px;
+}
+.layer{
+    height:70px;
+    border-radius:12px;
+    margin-bottom:6px;
+}
+.layer.pink{background:#ff9fd1}
+.layer.cream{background:#5a2c16}
+.candle{
+    width:10px;
+    height:40px;
+    background:#fff;
+    margin:0 auto;
+    position:relative;
+}
+.flame{
+    width:14px;
+    height:14px;
+    background:orange;
+    border-radius:50%;
+    position:absolute;
+    top:-14px;
+    left:-2px;
+    animation:flicker .2s infinite alternate;
+}
+@keyframes flicker{from{transform:scale(1)}to{transform:scale(.8)}}
+
+/* CALENDAR */
+.calendar{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:6px;
+    margin:20px 0;
+}
+.day{
+    padding:10px;
+    background:#111;
+    border-radius:6px;
+}
+.day.special{
+    border:2px solid #ff4fa3;
+    color:#ff9fd1;
+}
+
+/* ALBUM */
+.album{
+    display:none;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+    margin-top:20px;
+}
+.album img{
+    width:100%;
+    border-radius:12px;
+}
+#loveText{
+    margin-top:16px;
+    font-size:15px;
+    line-height:1.7;
+    color:#ffd1e8;
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div class="page active" id="page1">
+    <div class="typing" id="text1"></div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="page2">
+    <div class="typing" id="text2"></div>
+    <div class="cake">
+        <div class="candle"><div class="flame"></div></div>
+        <div class="layer pink"></div>
+        <div class="layer cream"></div>
+        <div class="layer pink"></div>
+    </div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="page3">
+    <div class="typing" id="text3"></div>
+
+    <div class="calendar">
+        <div class="day">1</div><div class="day">2</div><div class="day">3</div><div class="day">4</div><div class="day">5</div><div class="day">6</div><div class="day">7</div>
+        <div class="day">8</div><div class="day">9</div><div class="day">10</div><div class="day">11</div><div class="day">12</div><div class="day">13</div><div class="day">14</div>
+        <div class="day">15</div><div class="day">16</div><div class="day">17</div><div class="day special">18</div><div class="day">19</div><div class="day">20</div><div class="day">21</div>
+        <div class="day">22</div><div class="day">23</div><div class="day">24</div><div class="day">25</div><div class="day">26</div><div class="day">27</div><div class="day">28</div>
+        <div class="day">29</div><div class="day">30</div><div class="day">31</div>
+    </div>
+
+    <div class="typing">Mau lihat foto cantii gaa? 💕</div>
+    <button class="btn" id="albumBtn" onclick="showAlbum()">Lihat Album 📸</button>
+
+    <div id="loveText"></div>
+
+    <div class="album" id="album">
+        <!-- GANTI LINK FOTO DI SINI -->
+        <img src="https://files.catbox.moe/qhrjwr.jpg">
+        <img src="https://files.catbox.moe/gom997.jpg">
+        <img src="https://files.catbox.moe/sti0mg.jpg">
+        <img src="https://files.catbox.moe/tv4czz.jpg">
+        <img src="https://files.catbox.moe/r1j5yw.jpg">
+         <img src="https://files.catbox.moe/irlq8l.jpg">
+    </div>
+</div>
+
+<script>
+function typeText(el,text,delay,cb){
+    let i=0;
+    const t=setInterval(()=>{
+        el.innerHTML+=text.charAt(i);
+        i++;
+        if(i>=text.length){
+            clearInterval(t);
+            if(cb)cb();
+        }
+    },delay);
+}
+
+/* PAGE 1 */
+setTimeout(()=>{
+    typeText(text1,"Hari ini hari apa...?",70,()=>{
+        setTimeout(()=>{
+            text1.innerHTML="";
+            typeText(text1,"Benerr inii harii ulang tahun kamuu 🤍",70,()=>{
+                setTimeout(()=>{
+                    page1.classList.remove('active');
+                    page2.classList.add('active');
+                    typeText(text2,"Selamat ulang tahun sayangg 🎂🤍",70);
+                },2000);
+            });
+        },2000);
+    });
+},500);
+
+/* PAGE 2 -> PAGE 3 (11 detik) */
+setTimeout(()=>{
+    page2.classList.remove('active');
+    page3.classList.add('active');
+    typeText(text3,"18 Desember — hari spesial Kamu 💕",70);
+},11000);
+
+/* ALBUM */
+function showAlbum(){
+    album.style.display="grid";
+    albumBtn.style.display="none";
+
+    const text =
+`Lusyuuu kann inii diaa cewee Reyy 🤍
+Diaa cantiii, baikk,
+dann sabarr naaa seluass samuderaa.
+
+Reyy harapp kitaa bersama teruss yaaa...
+xixixiix 🤍 lovee youuu cantiiii kuuuu 💖`;
+
+    let i=0;
+    loveText.innerHTML="";
+    const t=setInterval(()=>{
+        loveText.innerHTML+=text.charAt(i);
+        i++;
+        if(i>=text.length)clearInterval(t);
+    },45);
+}
+</script>
+
+</body>
+</html>
